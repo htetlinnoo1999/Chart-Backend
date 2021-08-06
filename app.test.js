@@ -27,8 +27,6 @@ describe("Chart APIs testing", () => {
         name: "John Wick",
         age: "22",
         gender: 1,
-        createdAt: new Date(),
-        updatedAt: new Date(),
       })
       .expect("Content-Type", /json/)
       .expect(201)
@@ -41,6 +39,25 @@ describe("Chart APIs testing", () => {
               age: expect.any(String),
               gender: expect.any(Boolean),
             }),
+          })
+        );
+      });
+  });
+
+  it("POST /chart --> null data cannot save in db.", () => {
+    request(app)
+      .post("/chart")
+      .send({
+        name: "",
+        age: "",
+        gender: 1,
+      })
+      .expect("Content-Type", /json/)
+      .expect(500)
+      .then((res) => {
+        expect(res.body).toEqual(
+          expect.objectContaining({
+            name: expect.any(String),
           })
         );
       });

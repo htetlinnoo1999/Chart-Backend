@@ -34,7 +34,7 @@ describe("Chart APIs testing", () => {
         expect(res.body).toEqual(
           expect.objectContaining({
             status: expect.any(String),
-            created_data: expect.objectContaining({               
+            created_data: expect.objectContaining({
               name: expect.any(String),
               age: expect.any(String),
               gender: expect.any(Boolean),
@@ -86,7 +86,13 @@ describe("Chart APIs testing", () => {
       .expect("Content-Type", /json/)
       .expect(200)
       .then((res) => {
-        expect(res.body).toEqual(expect.arrayContaining([expect.any(Number)]));
+        expect(res.body).toEqual(
+          expect.objectContaining({
+            "Young Adults": expect.any(Number),
+            Adults: expect.any(Number),
+            Seniors: expect.any(Number),
+          })
+        );
       });
   });
 });

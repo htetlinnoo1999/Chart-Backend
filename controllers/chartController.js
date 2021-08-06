@@ -50,7 +50,11 @@ exports.barChartData = (req, res) => {
   });
 
   Promise.all([young_adults, adults, seniors]).then((values) => {
-    res.status(200).json(values);
+    res.status(200).json({
+      "Young Adults": values[0],
+      Adults: values[1],
+      Seniors: values[2],
+    });
   });
 };
 
